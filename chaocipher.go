@@ -10,26 +10,24 @@ import (
 )
 
 var (
-	crypt   = flag.String("crypt", "", "Encrypt/Decrypt with bulk ciphers.")
+	decrypt = flag.Bool("d", false, "Decrypt instead of Encrypt.")
 )
 
 
 func main() {
 	flag.Parse()
 
-	if (*crypt == "enc" || *crypt == "dec") {
-		data, _ := ioutil.ReadAll(os.Stdin)
-		b := strings.TrimSuffix(string(data), "\r\n")
-		b = strings.TrimSuffix(b, "\n")
-		b = strings.ToUpper(b)
-		if *crypt == "enc" {
-			cipherText := Chao(string(b), Encrypt, true)
-			fmt.Println(cipherText)
-		} else {
-			plainText := Chao(string(b), Decrypt, true)
-			fmt.Println(plainText)
-		}
-	}
+	data, _ := ioutil.ReadAll(os.Stdin)
+	b := strings.TrimSuffix(string(data), "\r\n")
+	b = strings.TrimSuffix(b, "\n")
+	b = strings.ToUpper(b)
+	if *decrypt {
+		plainText := Chao(string(b), Decrypt, true)
+		fmt.Println(plainText)
+	} else {
+		cipherText := Chao(string(b), Encrypt, true)
+		fmt.Println(cipherText)
+	} 
 }
 
 type Mode int
