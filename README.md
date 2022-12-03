@@ -1,4 +1,4 @@
-# chaocipher
+# CHAOCIPHER
 ### Low-Tech Encryption Scheme Pt.II
 
 ## Description
